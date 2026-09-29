@@ -1,0 +1,1025 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Keluarga Zulfitri ZA</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7f2, #e5ece1);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           HALAMAN UTAMA
+        ========================= */
+
+        .lobby {
+            min-height: 100vh;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .welcome {
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .small-title {
+            font-size: 13px;
+            letter-spacing: 4px;
+            color: #71816c;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .welcome h1 {
+            font-size: 55px;
+            color: #263b2a;
+            margin-bottom: 15px;
+        }
+
+        .welcome p {
+            color: #69736a;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           FOTO KELUARGA
+        ========================= */
+
+        .family-hero {
+            max-width: 950px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+
+        .family-photo-wrapper {
+            width: 100%;
+            height: 480px;
+            padding: 8px;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 15px 40px rgba(50, 70, 50, 0.13);
+            overflow: hidden;
+        }
+
+        .family-main-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 22px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .family-photo-wrapper:hover .family-main-photo {
+            transform: scale(1.03);
+        }
+
+        .family-caption {
+            margin-top: 15px;
+            color: #69736a;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           KARTU ANGGOTA KELUARGA
+        ========================= */
+
+        .family-grid {
+            max-width: 1050px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .family-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 22px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(50, 70, 50, 0.08);
+        }
+
+        .family-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 35px rgba(50, 70, 50, 0.15);
+        }
+
+        .family-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 17px;
+            background: #dce5d9;
+            display: block;
+            margin-bottom: 18px;
+        }
+
+        .family-card h2 {
+            font-size: 21px;
+            color: #263b2a;
+            margin-bottom: 7px;
+        }
+
+        .family-card span {
+            font-size: 14px;
+            color: #788278;
+        }
+
+        /* =========================
+           POPUP PROFIL
+        ========================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 30, 22, 0.75);
+            backdrop-filter: blur(8px);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 999;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .profile-box {
+            width: 100%;
+            max-width: 850px;
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: white;
+
+            border-radius: 28px;
+
+            padding: 30px;
+
+            position: relative;
+
+            animation: popup 0.3s ease;
+        }
+
+        /* Tombol X */
+
+        .close-button {
+            position: absolute;
+
+            right: 20px;
+            top: 20px;
+
+            width: 40px;
+            height: 40px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #eef2ec;
+
+            color: #39483d;
+
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            background: #dce5d9;
+        }
+
+        /* Isi Profil */
+
+        .profile-content {
+            display: grid;
+
+            grid-template-columns: 300px 1fr;
+
+            gap: 35px;
+
+            align-items: start;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 350px;
+
+            object-fit: cover;
+
+            border-radius: 22px;
+
+            background: #dce5d9;
+        }
+
+        .profile-role {
+            color: #81907f;
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            font-size: 12px;
+
+            margin-bottom: 10px;
+        }
+
+        .profile-info h2 {
+            font-size: 34px;
+
+            color: #263b2a;
+
+            margin-bottom: 25px;
+        }
+
+        /* Informasi */
+
+        .info-list {
+            display: grid;
+
+            gap: 13px;
+
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            display: grid;
+
+            grid-template-columns: 140px 1fr;
+
+            gap: 10px;
+
+            padding-bottom: 10px;
+
+            border-bottom: 1px solid #edf0ec;
+        }
+
+        .info-item strong {
+            color: #526052;
+        }
+
+        .info-item span {
+            color: #777;
+        }
+
+        /* Sinopsis */
+
+        .description {
+            background: #f5f8f3;
+
+            padding: 18px;
+
+            border-radius: 15px;
+
+            line-height: 1.7;
+
+            color: #687068;
+        }
+
+        /* Tombol kembali */
+
+        .back-button {
+            margin-top: 25px;
+
+            padding: 13px 22px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #304b35;
+
+            color: white;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .back-button:hover {
+            background: #223827;
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           ANIMASI
+        ========================= */
+
+        @keyframes popup {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(20px)
+                    scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+        /* =========================
+           HP
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .family-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-image {
+                height: 300px;
+            }
+
+            .welcome h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .lobby {
+                padding: 40px 15px;
+            }
+
+            .welcome h1 {
+                font-size: 35px;
+            }
+
+            .family-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .family-photo-wrapper {
+                height: 350px;
+            }
+
+            .family-photo {
+                height: 280px;
+            }
+
+            .profile-box {
+                padding: 20px;
+            }
+
+            .profile-image {
+                height: 280px;
+            }
+
+            .info-item {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================
+     LOBBY / HALAMAN AWAL
+================================== -->
+
+<main class="lobby">
+
+
+    <!-- UCAPAN -->
+
+    <section class="welcome">
+
+        <div class="small-title">
+            FAMILY WEBSITE
+        </div>
+
+        <h1>
+            Selamat Datang
+        </h1>
+
+        <p>
+
+            di Keluarga
+            <strong>Zulfitri ZA</strong>
+
+            <br>
+
+            Sebuah tempat sederhana
+            untuk mengenal anggota keluarga.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- ==================================
+         FOTO KELUARGA BESAR
+    ================================== -->
+
+    <section class="family-hero">
+
+        <div class="family-photo-wrapper">
+
+            <img
+                src="images/keluarga.jpg"
+                alt="Foto Keluarga Zulfitri ZA"
+                class="family-main-photo"
+
+                onerror="
+                    this.src='https://placehold.co/1200x700/e0e8dd/526052?text=FOTO+KELUARGA'
+                "
+            >
+
+        </div>
+
+        <p class="family-caption">
+            Keluarga Zulfitri ZA
+        </p>
+
+    </section>
+
+
+
+    <!-- ==================================
+         KARTU ANGGOTA KELUARGA
+    ================================== -->
+
+    <section class="family-grid">
+
+
+        <!-- AYAH -->
+
+        <div
+            class="family-card"
+            onclick="openProfile('ayah')"
+        >
+
+            <img
+                class="family-photo"
+                src="images/ayah.jpeg"
+
+                alt="Zulfitri ZA"
+
+                onerror="
+                    this.src='https://placehold.co/600x600/e0e8dd/526052?text=AYAH'
+                "
+            >
+
+            <h2>
+                Zulfitri ZA
+            </h2>
+
+            <span>
+                Ayah
+            </span>
+
+        </div>
+
+
+
+        <!-- IBU -->
+
+        <div
+            class="family-card"
+            onclick="openProfile('ibu')"
+        >
+
+            <img
+                class="family-photo"
+                src="images/ibu.jpeg"
+
+                alt="Nike Permata Sari"
+
+                onerror="
+                    this.src='https://placehold.co/600x600/e0e8dd/526052?text=IBU'
+                "
+            >
+
+            <h2>
+                Nike Permata Sari
+            </h2>
+
+            <span>
+                Ibu
+            </span>
+
+        </div>
+
+
+
+        <!-- ANAK 1 -->
+
+        <div
+            class="family-card"
+            onclick="openProfile('anak1')"
+        >
+
+            <img
+                class="family-photo"
+                src="images/anak1.jpeg"
+
+                alt="Mei Fajri"
+
+                onerror="
+                    this.src='https://placehold.co/600x600/e0e8dd/526052?text=ANAK+1'
+                "
+            >
+
+            <h2>
+                Mei Fajri
+            </h2>
+
+            <span>
+                Anak ke-1
+            </span>
+
+        </div>
+
+
+
+        <!-- ANAK 2 -->
+
+        <div
+            class="family-card"
+            onclick="openProfile('anak2')"
+        >
+
+            <img
+                class="family-photo"
+                src="images/anak2.jpeg"
+
+                alt="Octa Fajra"
+
+                onerror="
+                    this.src='https://placehold.co/600x600/e0e8dd/526052?text=ANAK+2'
+                "
+            >
+
+            <h2>
+                Octa Fajra
+            </h2>
+
+            <span>
+                Anak ke-2
+            </span>
+
+        </div>
+
+
+
+        <!-- ANAK 3 -->
+
+        <div
+            class="family-card"
+            onclick="openProfile('anak3')"
+        >
+
+            <img
+                class="family-photo"
+                src="images/anak3.jpeg"
+
+                alt="Fathiyah Muthmainnah"
+
+                onerror="
+                    this.src='https://placehold.co/600x600/e0e8dd/526052?text=ANAK+3'
+                "
+            >
+
+            <h2>
+                Fathiyah Muthmainnah
+            </h2>
+
+            <span>
+                Anak ke-3
+            </span>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ==================================
+     POPUP PROFIL
+================================== -->
+
+<div
+    class="modal"
+    id="profileModal"
+>
+
+
+    <div class="profile-box">
+
+
+        <!-- TOMBOL X -->
+
+        <button
+            class="close-button"
+            onclick="closeProfile()"
+        >
+            ×
+        </button>
+
+
+
+        <div class="profile-content">
+
+
+            <!-- FOTO -->
+
+            <div>
+
+                <img
+                    id="profileImage"
+                    class="profile-image"
+                    src=""
+                    alt="Foto Profil"
+                >
+
+            </div>
+
+
+
+            <!-- INFORMASI -->
+
+            <div class="profile-info">
+
+
+                <div
+                    id="profileRole"
+                    class="profile-role"
+                >
+                </div>
+
+
+                <h2 id="profileName">
+                </h2>
+
+
+
+                <!-- DATA -->
+
+                <div class="info-list">
+
+
+                    <div class="info-item">
+
+                        <strong>
+                            Nama
+                        </strong>
+
+                        <span id="dataName">
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <strong>
+                            Tempat Lahir
+                        </strong>
+
+                        <span>
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <strong>
+                            Tanggal Lahir
+                        </strong>
+
+                        <span>
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <strong>
+                            Umur
+                        </strong>
+
+                        <span>
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <strong>
+                            Hobi
+                        </strong>
+
+                        <span>
+                            -
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SINOPSIS -->
+
+                <div class="description">
+
+                    <strong>
+                        Sinopsis Sifat
+                    </strong>
+
+                    <p style="margin-top:8px;">
+
+                        Data profil belum diisi.
+                        Bagian ini dapat digunakan
+                        untuk menjelaskan sifat,
+                        karakter, atau cerita singkat
+                        anggota keluarga.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- KEMBALI -->
+
+                <button
+                    class="back-button"
+                    onclick="closeProfile()"
+                >
+
+                    ← Kembali ke Lobby
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ==================================
+     JAVASCRIPT
+================================== -->
+
+<script>
+
+
+    /* DATA KELUARGA */
+
+    const familyData = {
+
+
+        ayah: {
+
+            name: "Zulfitri ZA",
+
+            role: "Ayah",
+
+            image: "images/ayah.jpeg"
+
+        },
+
+
+        ibu: {
+
+            name: "Nike Permata Sari",
+
+            role: "Ibu",
+
+            image: "images/ibu.jpeg"
+
+        },
+
+
+        anak1: {
+
+            name: "Mei Fajri",
+
+            role: "Anak ke-1",
+
+            image: "images/anak1.jpeg"
+
+        },
+
+
+        anak2: {
+
+            name: "Octa Fajra",
+
+            role: "Anak ke-2",
+
+            image: "images/anak2.jpeg"
+
+        },
+
+
+        anak3: {
+
+            name: "Fathiyah Muthmainnah",
+
+            role: "Anak ke-3",
+
+            image: "images/anak3.jpeg"
+
+        }
+
+
+    };
+
+
+
+    /* BUKA PROFIL */
+
+    function openProfile(member) {
+
+
+        const data =
+            familyData[member];
+
+
+        document
+            .getElementById("profileName")
+            .textContent =
+            data.name;
+
+
+        document
+            .getElementById("profileRole")
+            .textContent =
+            data.role;
+
+
+        document
+            .getElementById("dataName")
+            .textContent =
+            data.name;
+
+
+
+        const image =
+            document.getElementById(
+                "profileImage"
+            );
+
+
+        image.src =
+            data.image;
+
+
+        image.onerror =
+            function() {
+
+                image.src =
+                    "https://placehold.co/600x600/e0e8dd/526052?text="
+                    +
+                    encodeURIComponent(
+                        data.role
+                    );
+
+            };
+
+
+
+        document
+            .getElementById("profileModal")
+            .classList.add("active");
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+
+    /* TUTUP PROFIL */
+
+    function closeProfile() {
+
+
+        document
+            .getElementById("profileModal")
+            .classList.remove("active");
+
+
+        document.body.style.overflow =
+            "auto";
+
+    }
+
+
+
+    /* KLIK DI LUAR POPUP */
+
+    document
+        .getElementById("profileModal")
+        .addEventListener(
+            "click",
+            function(event) {
+
+
+                if (
+                    event.target === this
+                ) {
+
+                    closeProfile();
+
+                }
+
+            }
+        );
+
+
+
+    /* TOMBOL ESC */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeProfile();
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
+```
